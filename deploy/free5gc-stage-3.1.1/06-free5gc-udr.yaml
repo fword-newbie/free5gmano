@@ -65,7 +65,7 @@ spec:
     spec:
       containers:      
       - name: myapp-container
-        image: free5gmano/free5gc-control-plane:stage3.1.1-amd64
+        image: everynamehavebeenuse/free5gc_control:3.1.1
         command: ["/bin/sh"]
         args: ["-c", "sleep 5s && ./bin/udr"]
         env:

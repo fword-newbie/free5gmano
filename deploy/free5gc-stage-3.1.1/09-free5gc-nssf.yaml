@@ -12,13 +12,13 @@ data:
       nssfName: NSSF                          # the name of this NSSF
       sbi:                                    # Service-based interface information
         scheme: http                          # the protocol for sbi (http or https)
-        registerIPv4: 192.168.2.166           # IP used to register to NRF
-        bindingIPv4: 192.168.2.166            # IP used to bind the service
+        registerIPv4: free5gc-nssf-svc          # IP used to register to NRF
+        bindingIPv4: free5gc-nssf-svc            # IP used to bind the service
         port: 8000                            # Port used to bind the service
       serviceNameList:                        # the SBI services provided by this SMF, refer to TS 29.531
         - nnssf-nsselection                   # Nnssf_NSSelection service
         - nnssf-nssaiavailability             # Nnssf_NSSAIAvailability service
-      nrfUri: http://192.168.2.165:8000       # a valid URI of NRF
+      nrfUri: http://free5gc-nrf-svc:8000       # a valid URI of NRF
       supportedPlmnList:                      # the PLMNs (Public land mobile network) list supported by this NSSF
         - mcc: 208                            # Mobile Country Code (3 digits string, digit: 0~9)
           mnc: 93                             # Mobile Network Code (2 or 3 digits string, digit: 0~9)
@@ -80,13 +80,13 @@ data:
             sst: 1
             sd: 010203
           nsiInformationList:
-            - nrfId: http://192.168.2.165:8000/nnrf-nfm/v1/nf-instances
+            - nrfId: http://free5gc-nrf-svc:8000/nnrf-nfm/v1/nf-instances
               nsiId: 22
         - snssai:
             sst: 1
             sd: 112233
           nsiInformationList:
-            - nrfId: http://192.168.2.165:8000/nnrf-nfm/v1/nf-instances
+            - nrfId: http://free5gc-nrf-svc:8000/nnrf-nfm/v1/nf-instances
               nsiId: 23
       amfSetList:                             # List of AMF Sets that my be assigned by this NSSF
         - amfSetId: 1                         # the AMF Set identifier
@@ -353,6 +353,19 @@ data:
         debugLevel: info
         ReportCaller: false
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: free5gc-nssf-svc
+spec:
+  selector:
+    app: free5gc-nssf
+  clusterIP: None # 10.96.100.6
+  ports:
+    - name: sbi
+      protocol: TCP
+      port: 29531
+---
 apiVersion: apps/v1 
 kind: Deployment
 metadata:
@@ -369,9 +382,9 @@ spec:
     spec:
       containers:      
       - name: myapp-container
-        image: free5gmano/free5gc-control-plane:stage3.1.1-amd64
+        image: everynamehavebeenuse/free5gc_control:3.1.1
         command: ["/bin/sh"]
-        args: ["-c", "./bin/nssf"]
+        args: ["-c", "sleep 5s && ./bin/nssf"]
         env:
         - name: GIN_MODE
           value: release # debug | release
@@ -379,31 +392,7 @@ spec:
         - name: nssfcfg
           mountPath: /free5gc/config/nssfcfg.yaml
           subPath: nssfcfg.yaml
-      initContainers:
-      - name: init-network-client
-        image: sdnvortex/network-controller:v0.4.9
-        command: ["/go/bin/client"]
-        args: ["-s=unix:///tmp/vortex.sock", "-b=br1", "-n=eth1", "-i=192.168.2.166/23"]
-        env:
-        - name: POD_NAME
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.name
-        - name: POD_NAMESPACE
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.namespace
-        - name: POD_UUID
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.uid
-        volumeMounts:
-        - mountPath: /tmp/
-          name: grpc-sock
       volumes:
-      - name: grpc-sock
-        hostPath:
-          path: /tmp/vortex/
       - name: nssfcfg
         configMap:
           name: free5gc-nssf-configmap
