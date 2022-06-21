@@ -11,8 +11,8 @@ data:
     configuration:
       sbi: # Service-based interface information
         scheme: http # the protocol for sbi (http or https)
-        registerIPv4: ausf.free5gc.org # IP used to register to NRF
-        bindingIPv4: ausf.free5gc.org  # IP used to bind the service
+        registerIPv4: free5gc-ausf-svc # IP used to register to NRF
+        bindingIPv4: free5gc-ausf-svc  # IP used to bind the service
         port: 8000 # Port used to bind the service
         tls: # the local path of TLS key
           pem: ./config/TLS/ausf.pem # AUSF TLS Certificate

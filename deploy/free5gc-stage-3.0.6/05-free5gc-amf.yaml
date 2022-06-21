@@ -11,13 +11,13 @@
 #     configuration:
 #       amfName: AMF # the name of this AMF
 #       ngapIpList:  # the IP list of N2 interfaces on this AMF
-#         # - amf.free5gc.org
+#         # - free5gc-amf-svc
 #         - 192.168.2.162
 #       sbi: # Service-based interface information
 #         scheme: http # the protocol for sbi (http or https)
-#         # registerIPv4: amf.free5gc.org # IP used to register to NRF
+#         # registerIPv4: free5gc-amf-svc # IP used to register to NRF
 #         registerIPv4: 192.168.2.162 # IP used to register to NRF
-#         # bindingIPv4: amf.free5gc.org  # IP used to bind the service
+#         # bindingIPv4: free5gc-amf-svc  # IP used to bind the service
 #         bindingIPv4: 192.168.2.162  # IP used to bind the service
 #         port: 8000 # port used to bind the service
 #         tls: # the local path of TLS key
@@ -51,7 +51,7 @@
 #               sd: 112233 # Slice Differentiator (3 bytes hex string, range: 000000~FFFFFF)
 #       supportDnnList:  # the DNN (Data Network Name) list supported by this AMF
 #         - internet
-#       nrfUri: http://nrf.free5gc.org:8000 # a valid URI of NRF
+#       nrfUri: http://free5gc-nrf-svc:8000 # a valid URI of NRF
 #       security:  # NAS security parameters
 #         integrityOrder: # the priority of integrity algorithms
 #           - NIA2
@@ -205,13 +205,13 @@ data:
     configuration:
       amfName: AMF # the name of this AMF
       ngapIpList:  # the IP list of N2 interfaces on this AMF
-        # - amf.free5gc.org
+        # - free5gc-amf-svc
         - 192.168.2.162
       sbi: # Service-based interface information
         scheme: http # the protocol for sbi (http or https)
-        # registerIPv4: amf.free5gc.org # IP used to register to NRF
+        # registerIPv4: free5gc-amf-svc # IP used to register to NRF
         registerIPv4: 192.168.2.162 # IP used to register to NRF
-        # bindingIPv4: amf.free5gc.org  # IP used to bind the service
+        # bindingIPv4: free5gc-amf-svc  # IP used to bind the service
         bindingIPv4: 192.168.2.162  # IP used to bind the service
         port: 8000 # port used to bind the service
         tls: # the local path of TLS key
@@ -245,7 +245,7 @@ data:
               sd: 112233 # Slice Differentiator (3 bytes hex string, range: 000000~FFFFFF)
       supportDnnList:  # the DNN (Data Network Name) list supported by this AMF
         - internet
-      nrfUri: http://nrf.free5gc.org:8000 # a valid URI of NRF
+      nrfUri: http://free5gc-nrf-svc:8000 # a valid URI of NRF
       security:  # NAS security parameters
         integrityOrder: # the priority of integrity algorithms
           - NIA2

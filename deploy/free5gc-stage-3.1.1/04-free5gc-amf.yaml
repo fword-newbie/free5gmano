@@ -11,23 +11,20 @@ data:
     configuration:
       amfName: AMF # the name of this AMF
       ngapIpList:  # the IP list of N2 interfaces on this AMF
-        # - amf.free5gc.org
         - free5gc-amf-svc
       sbi: # Service-based interface information
         scheme: http # the protocol for sbi (http or https)
-        # registerIPv4: amf.free5gc.org # IP used to register to NRF
         registerIPv4: free5gc-amf-svc # IP used to register to NRF
-        # bindingIPv4: amf.free5gc.org  # IP used to bind the service
         bindingIPv4: free5gc-amf-svc  # IP used to bind the service
         port: 8000 # port used to bind the service
-        tls: # the local path of TLS key
-          pem: ./config/TLS/amf.pem # AMF TLS Certificate
-          key: ./config/TLS/amf.key # AMF TLS Private key
+        # tls: # the local path of TLS key
+        #   pem: ./config/TLS/amf.pem # AMF TLS Certificate
+        #   key: ./config/TLS/amf.key # AMF TLS Private key
       serviceNameList: # the SBI services provided by this AMF, refer to TS 29.518
         - namf-comm # Namf_Communication service
         - namf-evts # Namf_EventExposure service
         - namf-mt   # Namf_MT service
-        - namf-loc  # Namf_Location service 1
+        - namf-loc  # Namf_Location service
         - namf-oam  # OAM service
       servedGuamiList: # Guami (Globally Unique AMF ID) list supported by this AMF
         # <GUAMI> = <MCC><MNC><AMF ID>
@@ -123,12 +120,6 @@ data:
         debugLevel: info
         ReportCaller: false
       Aper:
-        debugLevel: info
-        ReportCaller: false
-      PathUtil:
-        debugLevel: info
-        ReportCaller: false
-      OpenApi:
         debugLevel: info
         ReportCaller: false
 
