@@ -22,9 +22,10 @@ data:
       description: WebUI initial local configuration
 
     configuration:
-      mongodb:                                # the mongodb connected by this webui
-        name: free5gc                         # name of the mongodb
-        url: mongodb://mongodb-svc:27017      # a valid URL of the mongodb
+      mongodb: # the mongodb connected by this webui
+        name: free5gc # name of the mongodb
+        # url: mongodb://db:27017 # a valid URL of the mongodb
+        url: mongodb://mongodb-svc:27017 # a valid URL of the mongodb
 
     # the kind of log output
     # debugLevel: how detailed to output, value: trace, debug, info, warn, error, fatal, panic
@@ -33,6 +34,15 @@ data:
       WEBUI:
         debugLevel: info
         ReportCaller: true
+      PathUtil:
+        debugLevel: info
+        ReportCaller: false
+      OpenApi:
+        debugLevel: info
+        ReportCaller: false
+      MongoDBLibrary:
+        debugLevel: info
+        ReportCaller: false
 ---
 apiVersion: apps/v1
 kind: Deployment

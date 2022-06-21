@@ -9,30 +9,30 @@ data:
       description: UPF configuration
 
     configuration:
-      # the kind of log output
-      # debugLevel: how detailed to output, value: trace, debug, info, warn, error, fatal, panic
-      # ReportCaller: enable the caller report or not, value: true or false
+      # debugLevel: panic|fatal|error|warn|info|debug|trace
       debugLevel: info
       ReportCaller: false
 
-      # The IP list of the N4 interface on this UPF (Can't set to 0.0.0.0)
+      # packetBufferHoldTime should be longer than Paging retry-out time of AMF.
+      # unit: seconds
+      packetBufferHoldTime: 30
+
       pfcp:
+        # - addr: upf.free5gc.org
         - addr: 192.168.2.160
 
-      # The IP list of the N3/N9 interfaces on this UPF
-      # If there are multiple connection, set addr to 0.0.0.0 or list all the addresses
       gtpu:
+        # - addr: upf.free5gc.org
         - addr: 192.168.2.160
         # [optional] gtpu.name
         # - name: upf.5gc.nctu.me
         # [optional] gtpu.ifname
         # - ifname: gtpif
 
-      # The DNN list supported by UPF
       dnn_list:
-        - dnn: internet                       # Data Network Name
-          cidr: 60.60.0.0/24                  # Classless Inter-Domain Routing for assigned IPv4 pool of UE
-          # [optional] dnn_list[*].natifname
+        - dnn: internet
+          cidr: 10.60.0.0/16
+          # [optional] apn_list[*].natifname
           # natifname: eth0
 ---
 apiVersion: apps/v1 
@@ -51,7 +51,7 @@ spec:
     spec:
       containers:      
       - name: free5gc-upf-container
-        image: free5gmano/free5gc-user-plane:stage3.1.1-amd64
+        image: everynamehavebeenuse/free5gc_user:3.1.1
         securityContext:
           privileged: true
         command: ["/bin/sh"]

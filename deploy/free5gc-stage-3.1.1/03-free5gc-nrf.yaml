@@ -5,7 +5,7 @@ metadata:
 data:
   nrfcfg.yaml: |
     info:
-      version: 1.0.0
+      version: 1.0.1
       description: NRF initial local configuration
 
     configuration:
@@ -49,9 +49,9 @@ spec:
     app: free5gc-nrf
   clusterIP: None # 10.96.100.5
   ports:
-#    - name: sbi
-#      protocol: TCP
-#      port: 29510
+   - name: sbi
+     protocol: TCP
+     port: 29510
 ---
 apiVersion: apps/v1 
 kind: Deployment
