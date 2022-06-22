@@ -26,7 +26,7 @@ data:
 
     # List of gNB IP addresses for Radio Link Simulation
     gnbSearchList:
-      - 10.244.0.200
+      - 10.244.0.148
 
     # UAC Access Identities Configuration
     uacAic:
@@ -95,7 +95,7 @@ spec:
     spec:
       containers:
       - name: ueransim-ue
-        image: free5gmano/ueransim:v3.2.5
+        image: everynamehavebeenuse/ueransim:3.1.1
         securityContext:
           privileged: true
         command: ["/bin/bash", "-c"]
