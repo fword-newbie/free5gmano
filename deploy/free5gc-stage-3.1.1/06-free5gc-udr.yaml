@@ -19,7 +19,7 @@ data:
         #   key: ./config/TLS/udr.key # UDR TLS Private key
       mongodb:
         name: free5gc # Database name in MongoDB
-        url: mongodb://db:27017 # URL of MongoDB
+        url: mongodb://mongodb-svc:27017 # URL of MongoDB
       nrfUri: http://free5gc-nrf-svc:8000 # a valid URI of NRF
 
     # the kind of log output
