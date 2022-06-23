@@ -24,7 +24,6 @@ data:
     configuration:
       mongodb: # the mongodb connected by this webui
         name: free5gc # name of the mongodb
-        # url: mongodb://db:27017 # a valid URL of the mongodb
         url: mongodb://mongodb-svc:27017 # a valid URL of the mongodb
 
     # the kind of log output
